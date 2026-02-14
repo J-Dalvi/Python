@@ -119,3 +119,45 @@ python main.py
 
 - If you get a security prompt from Outlook, allow it.  
 - If it errors, possibly due to running it from wrong path, so troubleshoot the error duh!
+
+<details>
+  <summary>Quick Checks :</summary>
+
+   - [x] What mailbox your current script is using ?
+
+      This line:
+      
+      ```inbox = outlook.GetDefaultFolder(6)  # 6 = Inbox```
+      
+      means: “Give me the default Inbox of the default Outlook profile/account.”  
+      So my script is almost certainly reading personal mailbox Inbox, not the team mailbox—unless the team mailbox is set as the default account in Outlook (less common).  
+
+   - [x] How to confirm which mailbox it’s reading ?
+      
+      Print the mailbox name of the Inbox you’re accessing
+      Update your script like this:
+      ```
+      import win32com.client
+
+      def main():
+          outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+          inbox = outlook.GetDefaultFolder(6)  # default inbox
+      
+          # This prints which store/mailbox this Inbox belongs to
+          store_name = inbox.Store.DisplayName
+          print("Default Inbox belongs to mailbox/store:", store_name)
+      
+          print("Total items in Inbox:", inbox.Items.Count)
+      
+      if __name__ == "__main__":
+          main()```
+
+   > What you’ll see
+     It will print something like:
+
+     Default Inbox belongs to mailbox/store: Juveria Dalvi  
+     or  
+     Default Inbox belongs to mailbox/store: Team Mailbox - XYZ  
+
+   That tells you clearly which one it is.
+</details>
