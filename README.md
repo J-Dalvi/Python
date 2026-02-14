@@ -26,3 +26,29 @@ I want a Python script that:
 - Reads emails from Inbox (optionally filter by date/sender/subject/unread)
 - Saves each mail (and optionally attachments) to a shared folder
 - Avoids duplicates + logs what it did
+
+## Chunk 0 — Prep: confirm my approach & prerequisites
+
+### 0.1 Confirm We are on Windows + Outlook desktop app
+This approach requires:
+
+- Windows
+- Outlook desktop installed and configured
+- I can open Inbox normally
+
+### 0.2 Install required Python package
+In VS Code terminal:
+
+```pip install pywin32```
+
+> You can keep BeautifulSoup/requests installed, but they aren’t required for the Outlook part.
+
+### 0.3 Optional but recommended: create a project structure
+
+Example: Folder named as 'outlook_export' within folder a file named as main.py, folders with name 'output' & 'logs
+
+outlook_export/   
+    main.py  
+    output/  
+    logs/  
+
