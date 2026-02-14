@@ -52,3 +52,70 @@ outlook_export/
     output/  
     logs/  
 
+<details> 
+   <summary> Output Folder </summary>
+
+Purpose:  
+To store the emails and attachments you export.
+
+Example usage:  
+- Save .msg files inside output/  
+- Save attachments inside output/attachments/  
+
+You can rename this folder to anything:  
+
+- saved_emails/  
+- exported/  
+- outlook_dump/  
+- or directly use your shared folder path (e.g., \\server\share\folder\)  
+</details>
+
+<details>
+   <summary> Logs Folder</summary>
+
+Purpose:  
+To keep logs of:  
+
+- when the script ran
+- how many emails it exported
+- any errors
+
+It's optional, but very useful later when you automate the script in Windows Task Scheduler.  
+Common files inside:
+
+- logs/run_20260214.txt
+- logs/errors.txt
+
+You can rename it too:
+
+- logfiles/
+- monitoring/
+- or skip it completely for now
+</details>
+
+## Chunk 1 — “Hello Outlook”: connect and count Inbox mails
+
+Replace main.py with this minimal test:
+
+```
+import win32com.client
+
+def main():
+    outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+    inbox = outlook.GetDefaultFolder(6)  # 6 = Inbox
+    items = inbox.Items
+    print("Total items in Inbox:", items.Count)
+
+if __name__ == "__main__":
+    main()
+```
+
+- [X] Run it
+```
+python main.py
+```
+
+> Expected output: it prints a number.
+
+- If you get a security prompt from Outlook, allow it.  
+- If it errors, possibly due to running it from wrong path, so troubleshoot the error duh!
