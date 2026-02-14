@@ -150,7 +150,8 @@ python main.py
           print("Total items in Inbox:", inbox.Items.Count)
       
       if __name__ == "__main__":
-          main()```
+          main()
+      ```
 
       > What you’ll see
         It will print something like:
@@ -158,12 +159,13 @@ python main.py
         Default Inbox belongs to mailbox/store: Juveria Dalvi  
         or  
         Default Inbox belongs to mailbox/store: Team Mailbox - XYZ  
-   
+
       That tells you clearly which one it is.
 
    - [x] Prove what’s being counted
 
-      ```import win32com.client
+      ```
+         import win32com.client
 
          def main():
              outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
@@ -180,34 +182,35 @@ python main.py
              print("Inbox UNREAD items:", unread)
          
          if __name__ == "__main__":
-             main()```
+             main()
+      ```
 
       This will usually explain the mismatch
    
   - [X] For Master Data Mailbox
       
-   ### Verify you can open Master Data Inbox
-   
+      ### Verify you can open Master Data Inbox
+      
       Create/replace main.py with this first (just a safe check):
-   
-      ```import win32com.client
-   
-         STORE_NAME = "Master Data"
-         
-         def main():
-             outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-         
-             root = outlook.Folders[STORE_NAME]
-             inbox = root.Folders["Inbox"]
-         
-             total = inbox.Items.Count
-             unread = inbox.Items.Restrict("[UnRead] = True").Count
-         
-             print("Store:", root.Name)
-             print("Inbox total items:", total)
-             print("Inbox unread items:", unread)
-         
-         if __name__ == "__main__":
-             main() ```
- 
+      
+       ```
+      import win32com.client
+      
+      def main():
+          outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+          inbox = outlook.GetDefaultFolder(6)
+      
+          items = inbox.Items
+          total = items.Count
+      
+          unread_items = items.Restrict("[UnRead] = True")
+          unread = unread_items.Count
+      
+          print("Mailbox/store:", inbox.Store.DisplayName)
+          print("Inbox TOTAL items:", total)
+          print("Inbox UNREAD items:", unread)
+      
+      if __name__ == "__main__":
+          main()
+       ```
 </details>
