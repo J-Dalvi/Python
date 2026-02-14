@@ -15,3 +15,14 @@
 
 - Issue Noted:- I currently cannot Verify PATH entries due to admin rights restriction.
 - Workaround: Use Python via full path or reinstall with "Add to PATH" enabled
+
+# Define Scope
+
+What I am building (high level)
+
+I want a Python script that:
+
+- Connects to Outlook
+- Reads emails from Inbox (optionally filter by date/sender/subject/unread)
+- Saves each mail (and optionally attachments) to a shared folder
+- Avoids duplicates + logs what it did
