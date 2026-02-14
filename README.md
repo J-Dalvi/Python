@@ -47,10 +47,10 @@ In VS Code terminal:
 
 Example: Folder named as 'outlook_export' within folder a file named as main.py, folders with name 'output' & 'logs
 
-outlook_export/   
-    main.py  
-    output/  
-    logs/  
+> outlook_export/   
+  > main.py  
+   > output/  
+   > logs/  
 
 <details> 
    <summary> Output Folder </summary>
