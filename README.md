@@ -195,31 +195,21 @@ python main.py
       
        ```
       import win32com.client
-
-def inbox_counts_for_store(outlook, store_name: str):
-    root = outlook.Folders[store_name]
-
-    # Inbox might be under root.Folders["Inbox"]
-    inbox = root.Folders["Inbox"]
-
-    total = inbox.Items.Count
-    unread = inbox.Items.Restrict("[UnRead] = True").Count
-
-    print(f"\nStore: {store_name}")
-    print(f"  Inbox TOTAL items:  {total}")
-    print(f"  Inbox UNREAD items: {unread}")
-
 def main():
-    outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-
-    print("Stores visible to Outlook:")
-    for i in range(1, outlook.Folders.Count + 1):
-        print(" ", outlook.Folders.Item(i).Name)
-
-    inbox_counts_for_store(outlook, "j.dalvi@royalihc.com")
-    inbox_counts_for_store(outlook, "Master Data")
-
-if __name__ == "__main__":
-    main()
+          outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+          inbox = outlook.GetDefaultFolder(6)
+      
+          items = inbox.Items
+          total = items.Count
+      
+          unread_items = items.Restrict("[UnRead] = True")
+          unread = unread_items.Count
+      
+          print("Mailbox/store:", inbox.Store.DisplayName)
+          print("Inbox TOTAL items:", total)
+          print("Inbox UNREAD items:", unread)
+      
+      if __name__ == "__main__":
+          main()
        ```
 </details>
